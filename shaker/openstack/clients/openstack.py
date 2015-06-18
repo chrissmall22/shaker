@@ -61,15 +61,15 @@ class OpenStackClientProxy(object):
 
 
 class OpenStackClient(object):
-    def __init__(self, username, password, tenant_name, auth_url, region_name):
-        self.region_name = region_name or 'RegionOne'
+    def __init__(self, username, password, tenant_name, auth_url, region_name, cacert):
+        self.region_name = region_name or 'regionOne'
         self._osc_cache = {}
         self.keystone_creator = functools.partial(
             keystone.create_keystone_client,
             username=username, password=password,
-            tenant_name=tenant_name, auth_url=auth_url)
+            tenant_name=tenant_name, auth_url=auth_url, cacert=cacert)
         self.session_creator = functools.partial(
-            keystone.create_keystone_session,
+            keystone.create_keystone_session, cacert,
             username=username, password=password,
             tenant_name=tenant_name, auth_url=auth_url)
         # ping OpenStack
