@@ -31,8 +31,7 @@ def create_client(keystone_client, os_region_name, cacert):
     return heat_client_pkg.Client(HEAT_VERSION,
                                   endpoint=orchestration_api_url,
                                   token=keystone_client.auth_token,
-				  cacert=cacert,
-				  insecure=1)
+                                  ca_file=cacert)
 
 
 def wait_stack_completion(heat_client, stack_id):

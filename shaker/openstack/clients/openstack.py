@@ -61,7 +61,8 @@ class OpenStackClientProxy(object):
 
 
 class OpenStackClient(object):
-    def __init__(self, username, password, tenant_name, auth_url, region_name, cacert):
+    def __init__(self, username, password, tenant_name, auth_url, region_name,
+                 cacert):
         self.region_name = region_name or 'RegionOne'
         self.cacert = cacert or ''
         self._osc_cache = {}
@@ -86,7 +87,8 @@ class OpenStackClient(object):
             client = MODERN_CLIENT_MAKERS[name](session, self.region_name)
         elif name in OLD_CLIENT_MAKERS:
             client_creator = functools.partial(
-                OLD_CLIENT_MAKERS[name], os_region_name=self.region_name, cacert=self.cacert)
+                OLD_CLIENT_MAKERS[name], os_region_name=self.region_name,
+                cacert=self.cacert)
             client = OpenStackClientProxy(self.keystone_creator,
                                           client_creator)
 

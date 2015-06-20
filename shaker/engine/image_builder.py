@@ -44,7 +44,7 @@ def init():
         LOG.error('Error establishing connection to OpenStack: %s. '
                   'Please verify OpenStack credentials (--os-username, '
                   '--os-password, --os-tenant-name, --os-auth-url, '
-		  '--os-cacert)', e)
+                  '--os-cacert)', e)
         exit(1)
 
     return openstack_client
